@@ -33,7 +33,7 @@ parameters:
     default: m1.small
   vmx_vpfe_flavor:
     type: string
-    description: Flavor created to support the vPFE VM 
+    description: Flavor created to support the vPFE VM
     default: vmx.vfp1
   vmx_oam_network:
     type: string
@@ -63,13 +63,13 @@ resources:
 
   vmx_internalnet_id:
     type: OS::Neutron::Net
-#    properties:
-#      name: vmx_internalnet_id
+    properties:
+      name: vmx_internalnet
 
   vmx_internalnet_subnet_id:
     type: OS::Neutron::Subnet
     properties:
-#      name: vmx_internalnet_subnet_id
+      name: vmx_internalnet_subnet_id
       network_id: { get_resource: vmx_internalnet_id }
       cidr: 128.0.0.0/16
       enable_dhcp: False
@@ -93,13 +93,13 @@ resources:
       type: OS::Neutron::Port
       properties:
         network: {get_param: ge000_network}
-#        vnetwork_id: {get_attr: [ge000_network, bridge_network]} 
+#        vnetwork_id: {get_attr: [ge000_network, bridge_network]}
 
   ge001_port:
       type: OS::Neutron::Port
       properties:
         network: {get_param: ge001_network}
-#        vnetwork_id: {get_attr: [ge000_network, bridge_network]} 
+#        vnetwork_id: {get_attr: [ge000_network, bridge_network]}
 
   instance_vre:
     type: OS::Nova::Server
@@ -127,7 +127,8 @@ resources:
 #        console: vidconsole
       personality: {
         /var/db/cumulus/baseline_config.template: {get_file: /root/vmx_baseline.conf},
-        /config/license/JUNOS773156.lic: { get_file: /root/Virtual_Junos.txt }}
+        /config/license/JUNOS773156.lic: { get_file: /root/Virtual_Junos.txt }
+        }
 
   instance_vpfe:
     type: OS::Nova::Server
