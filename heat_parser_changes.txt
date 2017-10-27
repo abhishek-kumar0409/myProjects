@@ -1,0 +1,267 @@
+heat_engine
+================
+service.py
+    def parseHeatTemplate(self, resources):
+
+      result = {}
+      LOG.info("^^^^^^^^^^^^RESOURCES  ^^^^^^^".format(resources))
+      for k in resources.keys():
+              import pdb;pdb.set_trace()
+              LOG.info("^^^^^^^^^^^^^^^^^RESOURCES KEYS ^^^^^^^^^ {0} ".format(k))
+              result[k] = {}
+              properties = resources[k]._properties
+              if properties is None:
+                  properties = {}
+              for props in properties.keys():
+                  if (isinstance( properties[props], functions.GetParam)):
+                      result[k][props] = properties[props].result()
+
+                  elif (isinstance( properties[props], list)):
+                      LOG.info("TYPE IS LIST  ====> {0}".format(properties[props]))
+                      lists = []
+                      for eachProp in properties[props]:
+                          #tempDict = json.loads(eachProp)
+                          for key, value in eachProp.iteritems():
+                              print (key, value)
+                              LOG.info("Key --> {0} --- {1}".format(key, value))
+                              lists.append(value.result())
+
+                      result[k][props] = lists
+
+                  elif (isinstance(properties[prop], dict)):
+                       LOG.info("TYPE IS DICT")
+                       pass
+
+      LOG.info("results -----> {0}".format(result))
+      return result
+====================================================
+def _parse_template_and_validate_stack():
+
+======================Parse and validate stack==================
+
+ stack = parser.Stack(cnxt, stack_name, tmpl,
+                             owner_id=owner_id,
+                             nested_depth=nested_depth,
+                             user_creds_id=user_creds_id,
+                             stack_user_project_id=stack_user_project_id,
+                             convergence=convergence,
+                             parent_resource=parent_resource_name,
+                             **common_params)
+
+        tmplObject = self.resource_enforcer.enforce_stack(stack)
+
+        resultDict = self.parseHeatTemplate(tmplObject)
+        LOG.info("Result Dict :: {0}".format(resultDict))
+        stack.jsonData = resultDict
+======================================================================
+common/policy.log
+
+    def enforce(self, context, res_type, scope=None, target=None):
+        # NOTE(pas-ha): try/except just to log the exception
+        result = self._enforce(context, res_type, scope, target)
+
+        if result:
+            # check for wildcard resource types
+            subparts = res_type.split("::")[:-1]
+            subparts.append('*')
+            res_type_wc = "::".join(subparts)
+            return self._enforce(context, res_type_wc, scope, target)
+
+        return result
+
+    def enforce_stack(self, stack, scope=None, target=None):
+        result = {}
+        #for res in stack.resources.values():
+        #    self.enforce(stack.context, res.type(), scope=scope, target=target)
+        for resource_name, resource_value in stack.resources.iteritems():
+            result[resource_name] = resource_value
+
+        return result
+============================================================================================
+client.py
+==========
+
+import logging
+import sys,os
+import imp
+import subprocess
+from ConfigParser import RawConfigParser
+from datetime import datetime
+import requests,json,prettytable
+import yaml
+from bson import json_util
+
+filepath = ""
+vevato_log = ""
+user_log_flag = False
+
+class server_details():
+
+    def __init__(self):
+        pass
+
+    def authV2(self ,keystone_auth_url, os_username, password, tenant_id):
+     """
+         This method is invoked for the authentication which is needed to
+         call the nova api.this method returns the credentials for making the api
+         call.(Keystone V2.0)
+     """
+     print "\n\n############################################################################################################################"
+     value = {
+           "auth": {
+              "tenantName": tenant_id,
+              "passwordCredentials": {
+              "username": os_username,
+              "password": password
+
+             }
+           }
+          }
+     cmd = keystone_auth_url+"/tokens"
+     headers={'Content-Type':'application/json'}
+     #print "cmd",cmd, json.dumps(value),headers
+     response = requests.post(cmd, data =
+     json.dumps(value),headers=headers)
+     response = requests.post(cmd, data =
+     json.dumps(value),headers=headers)
+     output = response.json()
+     #print "\n\nOUTPUT::::##################################",output
+     #print "\n\n\n\n\n:::::::::::::::::::::::::output['access']['serviceCatalog']",output['access']['token']
+     for sc in output['access']['serviceCatalog']:
+        if sc['name'] == 'heat':
+            admin_endpoint = sc['endpoints'][0]['adminURL']
+            break
+
+     tenant_id = output['access']['token']['tenant']['id']
+
+     access_token = output['access']['token']['id']
+     print "\n\nAccess token, tenant_id::::::::",access_token,admin_endpoint,tenant_id
+     return access_token,admin_endpoint
+
+    def authV3(self ,keystone_auth_url, os_username, password, tenant_id, domain_id =None):
+      """
+       This method is invoked for the authentication which is needed to call the
+       nova api.this method returns the credentials for making the api call.(Keystone V3)
+      """
+      value = {\
+            "auth": {\
+               "identity": {\
+                            "methods": [\
+                                       "password"\
+                                       ],\
+                            "password": {\
+                                         "user": {\
+                                                 "name": os_username,\
+                                                 "password": password,\
+                                                 "domain":{"id":domain_id}
+
+                                                }
+                                        }
+                           },
+                           "scope": {
+                           "project": {
+                                       "name": tenant_id,
+                                       "domain":{"id":domain_id}
+                                      }
+                      }
+                    }
+                }
+      #print "value ::::::: ", value
+      cmd = keystone_auth_url+"/auth/tokens"
+      #print "cmd :: ", cmd
+      headers={'Content-Type':'application/json'}
+      #print "cmd",cmd, json.dumps(value),headers
+      response = requests.post(cmd, data = json.dumps(value),headers=headers)
+      output1 = response.json()
+      #print "Output in auth V3 :: ", output1
+      output2 = response.headers
+      for sc in output1['token']['catalog']:
+         if sc['name'] == 'heat':
+            for j in sc['endpoints']:
+                if j['interface'] == 'public':
+                     #print j['interface']
+                     admin_endpoint= j['url']
+                     #print admin_endpoint
+
+      access_token = output2['X-Subject-Token']
+      #print admin_endpoint
+      return access_token,admin_endpoint
+
+
+    def auth(self, keystone_auth_url, os_username, password, tenant_id, domain_id =None):
+       """
+          This method is invoked for the authentication according to
+          keystone version.
+       """
+       print "inside the auth method::::::::::::::::::::::::::::::::::\n\n\n"
+       keystone_auth_url = keystone_auth_url.strip()
+       print "Keystone Auth URL :: ", keystone_auth_url
+       keystoneVersion = keystone_auth_url.split("/")[-1]
+       print "keystoneVersion :: ", keystoneVersion
+
+
+       if keystoneVersion == "v2.0":
+            access_token,admin_endpoint = self.authV2(keystone_auth_url, os_username, password, tenant_id)
+       elif keystoneVersion == "v3":
+            access_token,admin_endpoint = self.authV3(keystone_auth_url, os_username, password, tenant_id, domain_id)
+
+       return access_token,admin_endpoint
+
+    def readHeatTemplate(self):
+        contents = {}
+        with open("ex2.yaml", 'r') as stream:
+           try:
+              contents = yaml.load(stream, Loader=yaml.BaseLoader)
+           except yaml.YAMLError as exc:
+              print(exc)
+        return contents
+
+    def parse_template(self, auth_url , tenant_username, tenant_password, tenant_id, domain_id):
+        result_dict = {}
+        access_token, admin_endpoint = self.auth(auth_url ,tenant_username, tenant_password, tenant_id, domain_id)
+        print "***************access_token,tenant_id***********************",access_token, admin_endpoint
+        headers = { 'X-Auth-Token': access_token,'Content-Type': 'application/json' }
+
+        template_contents = self.readHeatTemplate()
+        payload = {"files": {}, "disable_rollback": "true", "parameters": {}, "stack_name": "test", "environment": {}, "template": template_contents, "flag" : "true"}
+        print "Request payload : ", payload
+
+        api = "{0}/stacks".format(admin_endpoint)
+        print "API :: ", api
+
+        r = requests.post(api, headers=headers, data = json.dumps(payload))
+
+        print "Response :: ", r.reason
+        print "Response status : ", r.status_code
+
+        output = r.json()
+        print "--------->", output
+        result = {'status':'Failure','msg':None, 'data':None}
+        if output != "":
+           result['status'] = "Success"
+           result['msg'] = "Stack Created Successfully"
+           result['data'] = result_dict
+                                                                  else:
+           result['msg'] = "Failed to create stack"
+
+        return result
+
+def main():
+     keystone_auth_url = "http://192.168.10.150:5000/v3"
+     tenant_username = "admin"
+     tenant_password = "devstack"
+     tenant_id = "demo"
+     domain_id="default"
+     sv= server_details()
+     #auth_response = sv.auth( keystone_auth_url, tenant_username, tenant_password, tenant_id, domain_id)
+     #print auth_response
+     parse_result = sv.parse_template(keystone_auth_url , tenant_username, tenant_password, tenant_id, domain_id)
+     print parse_result
+
+if __name__=='__main__':
+     main()
+                      
+
+
+                                                                                
+
