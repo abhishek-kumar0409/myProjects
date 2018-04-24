@@ -1,0 +1,1366 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="db.sqlite" id="Project_396702c" template="Default" database="MySql" >
+	<schema name="Default" schemaname="Default" >
+		<table name="argument" >
+			<column name="id)" type="varchar" jt="12" />
+			<column name="foreign key(task_fk" type="varchar" jt="12" />
+			<column name="id" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="name" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="type_name" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="description" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="_value" type="blob" length="2000000000" decimal="10" jt="2004" />
+			<column name="task_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="operation_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<index name="pk_argument" unique="UNIQUE" >
+				<column name="id)" />
+				<column name="foreign key(task_fk" />
+			</index>
+			<index name="ix_argument_name" unique="NORMAL" >
+				<column name="name" />
+			</index>
+			<fk name="Fk_argument" to_schema="Default" to_table="operation" delete_action="cascade" >
+				<fk_column name="operation_fk" pk="id" />
+			</fk>
+			<fk name="Fk_argument" to_schema="Default" to_table="task" delete_action="cascade" >
+				<fk_column name="task_fk" pk="id" />
+			</fk>
+		</table>
+		<table name="artifact" >
+			<column name="id)" type="varchar" jt="12" />
+			<column name="foreign key(artifact_template_fk" type="varchar" jt="12" />
+			<column name="id" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="name" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="description" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="source_path" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="target_path" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="repository_url" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="repository_credential" type="varchar" length="2000000000" decimal="10" jt="12" />
+			<column name="artifact_template_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="type_fk" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="node_fk" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<index name="pk_artifact" unique="UNIQUE" >
+				<column name="id)" />
+				<column name="foreign key(artifact_template_fk" />
+			</index>
+			<index name="ix_artifact_name" unique="NORMAL" >
+				<column name="name" />
+			</index>
+			<fk name="Fk_artifact" to_schema="Default" to_table="artifact_template" delete_action="cascade" >
+				<fk_column name="artifact_template_fk" pk="id" />
+			</fk>
+			<fk name="Fk_artifact" to_schema="Default" to_table="node" delete_action="cascade" >
+				<fk_column name="node_fk" pk="id" />
+			</fk>
+			<fk name="Fk_artifact" to_schema="Default" to_table="type" delete_action="cascade" >
+				<fk_column name="type_fk" pk="id" />
+			</fk>
+		</table>
+		<table name="artifact_template" >
+			<column name="id)" type="varchar" jt="12" />
+			<column name="foreign key(type_fk" type="varchar" jt="12" />
+			<column name="id" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="name" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="description" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="source_path" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="target_path" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="repository_url" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="repository_credential" type="varchar" length="2000000000" decimal="10" jt="12" />
+			<column name="type_fk" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="node_template_fk" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<index name="pk_artifact_template" unique="UNIQUE" >
+				<column name="id)" />
+				<column name="foreign key(type_fk" />
+			</index>
+			<index name="ix_artifact_template_name" unique="NORMAL" >
+				<column name="name" />
+			</index>
+			<fk name="Fk_artifact_template" to_schema="Default" to_table="node_template" delete_action="cascade" >
+				<fk_column name="node_template_fk" pk="id" />
+			</fk>
+			<fk name="Fk_artifact_template" to_schema="Default" to_table="type" delete_action="cascade" >
+				<fk_column name="type_fk" pk="id" />
+			</fk>
+		</table>
+		<table name="attribute" >
+			<column name="id)" type="varchar" jt="12" />
+			<column name="foreign key(node_fk" type="varchar" jt="12" />
+			<column name="id" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="name" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="type_name" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="description" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="_value" type="blob" length="2000000000" decimal="10" jt="2004" />
+			<column name="node_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="node_template_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<index name="pk_attribute" unique="UNIQUE" >
+				<column name="id)" />
+				<column name="foreign key(node_fk" />
+			</index>
+			<index name="ix_attribute_name" unique="NORMAL" >
+				<column name="name" />
+			</index>
+			<fk name="Fk_attribute" to_schema="Default" to_table="node" delete_action="cascade" >
+				<fk_column name="node_fk" pk="id" />
+			</fk>
+			<fk name="Fk_attribute" to_schema="Default" to_table="node_template" delete_action="cascade" >
+				<fk_column name="node_template_fk" pk="id" />
+			</fk>
+		</table>
+		<table name="capability" >
+			<column name="id)" type="varchar" jt="12" />
+			<column name="foreign key(type_fk" type="varchar" jt="12" />
+			<column name="id" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="name" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="min_occurrences" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="max_occurrences" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="occurrences" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="type_fk" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="node_fk" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="capability_template_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<index name="pk_capability" unique="UNIQUE" >
+				<column name="id)" />
+				<column name="foreign key(type_fk" />
+			</index>
+			<index name="ix_capability_name" unique="NORMAL" >
+				<column name="name" />
+			</index>
+			<fk name="Fk_capability" to_schema="Default" to_table="capability_template" delete_action="cascade" >
+				<fk_column name="capability_template_fk" pk="id" />
+			</fk>
+			<fk name="Fk_capability" to_schema="Default" to_table="node" delete_action="cascade" >
+				<fk_column name="node_fk" pk="id" />
+			</fk>
+			<fk name="Fk_capability" to_schema="Default" to_table="type" delete_action="cascade" >
+				<fk_column name="type_fk" pk="id" />
+			</fk>
+		</table>
+		<table name="capability_template" >
+			<column name="id)" type="varchar" jt="12" />
+			<column name="foreign key(type_fk" type="varchar" jt="12" />
+			<column name="id" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="name" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="description" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="min_occurrences" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="max_occurrences" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="type_fk" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="node_template_fk" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<index name="pk_capability_template" unique="UNIQUE" >
+				<column name="id)" />
+				<column name="foreign key(type_fk" />
+			</index>
+			<index name="ix_capability_template_name" unique="NORMAL" >
+				<column name="name" />
+			</index>
+			<fk name="Fk_capability_template" to_schema="Default" to_table="node_template" delete_action="cascade" >
+				<fk_column name="node_template_fk" pk="id" />
+			</fk>
+			<fk name="Fk_capability_template" to_schema="Default" to_table="type" delete_action="cascade" >
+				<fk_column name="type_fk" pk="id" />
+			</fk>
+		</table>
+		<table name="configuration" >
+			<column name="id)" type="varchar" jt="12" />
+			<column name="foreign key(operation_template_fk" type="varchar" jt="12" />
+			<column name="id" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="name" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="type_name" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="description" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="_value" type="blob" length="2000000000" decimal="10" jt="2004" />
+			<column name="operation_template_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="operation_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<index name="pk_configuration" unique="UNIQUE" >
+				<column name="id)" />
+				<column name="foreign key(operation_template_fk" />
+			</index>
+			<index name="ix_configuration_name" unique="NORMAL" >
+				<column name="name" />
+			</index>
+			<fk name="Fk_configuration" to_schema="Default" to_table="operation" delete_action="cascade" >
+				<fk_column name="operation_fk" pk="id" />
+			</fk>
+			<fk name="Fk_configuration" to_schema="Default" to_table="operation_template" delete_action="cascade" >
+				<fk_column name="operation_template_fk" pk="id" />
+			</fk>
+		</table>
+		<table name="execution" >
+			<column name="id)" type="varchar" jt="12" />
+			<column name="constraint execution_status check (status in (&#039;succeeded&#039;" type="varchar" jt="12" />
+			<column name="&#039;failed&#039;" type="varchar" jt="12" />
+			<column name="&#039;cancelled&#039;" type="varchar" jt="12" />
+			<column name="&#039;pending&#039;" type="varchar" jt="12" />
+			<column name="&#039;started&#039;" type="varchar" jt="12" />
+			<column name="&#039;cancelling&#039;" type="varchar" jt="12" />
+			<column name="id" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="name" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="created_at" type="datetime" length="2000000000" decimal="10" jt="93" />
+			<column name="started_at" type="datetime" length="2000000000" decimal="10" jt="93" />
+			<column name="ended_at" type="datetime" length="2000000000" decimal="10" jt="93" />
+			<column name="error" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="status" type="varchar" length="10" jt="12" />
+			<column name="workflow_name" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="service_fk" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<index name="pk_execution" unique="UNIQUE" >
+				<column name="id)" />
+				<column name="constraint execution_status check (status in (&#039;succeeded&#039;" />
+				<column name="&#039;failed&#039;" />
+				<column name="&#039;cancelled&#039;" />
+				<column name="&#039;pending&#039;" />
+				<column name="&#039;started&#039;" />
+				<column name="&#039;cancelling&#039;" />
+			</index>
+			<index name="ix_execution_created_at" unique="NORMAL" >
+				<column name="created_at" />
+			</index>
+			<index name="ix_execution_ended_at" unique="NORMAL" >
+				<column name="ended_at" />
+			</index>
+			<index name="ix_execution_started_at" unique="NORMAL" >
+				<column name="started_at" />
+			</index>
+			<index name="ix_execution_name" unique="NORMAL" >
+				<column name="name" />
+			</index>
+			<fk name="Fk_execution" to_schema="Default" to_table="service" delete_action="cascade" >
+				<fk_column name="service_fk" pk="id" />
+			</fk>
+		</table>
+		<table name="group" >
+			<column name="id)" type="varchar" jt="12" />
+			<column name="foreign key(type_fk" type="varchar" jt="12" />
+			<column name="id" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="name" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="description" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="type_fk" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="group_template_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="service_fk" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<index name="pk_group" unique="UNIQUE" >
+				<column name="id)" />
+				<column name="foreign key(type_fk" />
+			</index>
+			<index name="ix_group_name" unique="NORMAL" >
+				<column name="name" />
+			</index>
+			<fk name="Fk_group" to_schema="Default" to_table="group_template" delete_action="cascade" >
+				<fk_column name="group_template_fk" pk="id" />
+			</fk>
+			<fk name="Fk_group" to_schema="Default" to_table="service" delete_action="cascade" >
+				<fk_column name="service_fk" pk="id" />
+			</fk>
+			<fk name="Fk_group" to_schema="Default" to_table="type" delete_action="cascade" >
+				<fk_column name="type_fk" pk="id" />
+			</fk>
+		</table>
+		<table name="group_node" >
+			<column name="group_id" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="node_id" type="integer" length="2000000000" decimal="10" jt="4" />
+			<fk name="Fk_group_node" to_schema="Default" to_table="group" >
+				<fk_column name="group_id" pk="id" />
+			</fk>
+			<fk name="Fk_group_node" to_schema="Default" to_table="node" >
+				<fk_column name="node_id" pk="id" />
+			</fk>
+		</table>
+		<table name="group_template" >
+			<column name="id)" type="varchar" jt="12" />
+			<column name="foreign key(type_fk" type="varchar" jt="12" />
+			<column name="id" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="name" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="description" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="type_fk" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="service_template_fk" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<index name="pk_group_template" unique="UNIQUE" >
+				<column name="id)" />
+				<column name="foreign key(type_fk" />
+			</index>
+			<index name="ix_group_template_name" unique="NORMAL" >
+				<column name="name" />
+			</index>
+			<fk name="Fk_group_template" to_schema="Default" to_table="service_template" delete_action="cascade" >
+				<fk_column name="service_template_fk" pk="id" />
+			</fk>
+			<fk name="Fk_group_template" to_schema="Default" to_table="type" delete_action="cascade" >
+				<fk_column name="type_fk" pk="id" />
+			</fk>
+		</table>
+		<table name="group_template_node_template" >
+			<column name="group_template_id" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="node_template_id" type="integer" length="2000000000" decimal="10" jt="4" />
+			<fk name="Fk_group_template_node_template" to_schema="Default" to_table="group_template" >
+				<fk_column name="group_template_id" pk="id" />
+			</fk>
+			<fk name="Fk_group_template_node_template" to_schema="Default" to_table="node_template" >
+				<fk_column name="node_template_id" pk="id" />
+			</fk>
+		</table>
+		<table name="input" >
+			<column name="id)" type="varchar" jt="12" />
+			<column name="check (required in (0" type="varchar" jt="12" />
+			<column name="1" type="varchar" jt="12" />
+			<column name="id" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="name" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="type_name" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="description" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="_value" type="blob" length="2000000000" decimal="10" jt="2004" />
+			<column name="required" type="boolean" length="2000000000" decimal="10" jt="-7" />
+			<column name="interface_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="service_template_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="service_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="operation_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="task_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="execution_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="interface_template_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="operation_template_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<index name="pk_input" unique="UNIQUE" >
+				<column name="id)" />
+				<column name="check (required in (0" />
+				<column name="1" />
+			</index>
+			<index name="ix_input_name" unique="NORMAL" >
+				<column name="name" />
+			</index>
+			<fk name="Fk_input" to_schema="Default" to_table="execution" delete_action="cascade" >
+				<fk_column name="execution_fk" pk="id" />
+			</fk>
+			<fk name="Fk_input" to_schema="Default" to_table="interface" delete_action="cascade" >
+				<fk_column name="interface_fk" pk="id" />
+			</fk>
+			<fk name="Fk_input" to_schema="Default" to_table="interface_template" delete_action="cascade" >
+				<fk_column name="interface_template_fk" pk="id" />
+			</fk>
+			<fk name="Fk_input" to_schema="Default" to_table="operation" delete_action="cascade" >
+				<fk_column name="operation_fk" pk="id" />
+			</fk>
+			<fk name="Fk_input" to_schema="Default" to_table="operation_template" delete_action="cascade" >
+				<fk_column name="operation_template_fk" pk="id" />
+			</fk>
+			<fk name="Fk_input" to_schema="Default" to_table="service" delete_action="cascade" >
+				<fk_column name="service_fk" pk="id" />
+			</fk>
+			<fk name="Fk_input" to_schema="Default" to_table="service_template" delete_action="cascade" >
+				<fk_column name="service_template_fk" pk="id" />
+			</fk>
+			<fk name="Fk_input" to_schema="Default" to_table="task" delete_action="cascade" >
+				<fk_column name="task_fk" pk="id" />
+			</fk>
+		</table>
+		<table name="interface" >
+			<column name="id)" type="varchar" jt="12" />
+			<column name="foreign key(relationship_fk" type="varchar" jt="12" />
+			<column name="id" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="name" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="description" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="relationship_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="group_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="type_fk" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="node_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="interface_template_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<index name="pk_interface" unique="UNIQUE" >
+				<column name="id)" />
+				<column name="foreign key(relationship_fk" />
+			</index>
+			<index name="ix_interface_name" unique="NORMAL" >
+				<column name="name" />
+			</index>
+			<fk name="Fk_interface" to_schema="Default" to_table="group" delete_action="cascade" >
+				<fk_column name="group_fk" pk="id" />
+			</fk>
+			<fk name="Fk_interface" to_schema="Default" to_table="interface_template" delete_action="cascade" >
+				<fk_column name="interface_template_fk" pk="id" />
+			</fk>
+			<fk name="Fk_interface" to_schema="Default" to_table="node" delete_action="cascade" >
+				<fk_column name="node_fk" pk="id" />
+			</fk>
+			<fk name="Fk_interface" to_schema="Default" to_table="relationship" delete_action="cascade" >
+				<fk_column name="relationship_fk" pk="id" />
+			</fk>
+			<fk name="Fk_interface" to_schema="Default" to_table="type" delete_action="cascade" >
+				<fk_column name="type_fk" pk="id" />
+			</fk>
+		</table>
+		<table name="interface_template" >
+			<column name="id)" type="varchar" jt="12" />
+			<column name="foreign key(group_template_fk" type="varchar" jt="12" />
+			<column name="id" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="name" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="description" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="group_template_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="type_fk" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="relationship_template_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="node_template_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<index name="pk_interface_template" unique="UNIQUE" >
+				<column name="id)" />
+				<column name="foreign key(group_template_fk" />
+			</index>
+			<index name="ix_interface_template_name" unique="NORMAL" >
+				<column name="name" />
+			</index>
+			<fk name="Fk_interface_template" to_schema="Default" to_table="group_template" delete_action="cascade" >
+				<fk_column name="group_template_fk" pk="id" />
+			</fk>
+			<fk name="Fk_interface_template" to_schema="Default" to_table="node_template" delete_action="cascade" >
+				<fk_column name="node_template_fk" pk="id" />
+			</fk>
+			<fk name="Fk_interface_template" to_schema="Default" to_table="relationship_template" delete_action="cascade" >
+				<fk_column name="relationship_template_fk" pk="id" />
+			</fk>
+			<fk name="Fk_interface_template" to_schema="Default" to_table="type" delete_action="cascade" >
+				<fk_column name="type_fk" pk="id" />
+			</fk>
+		</table>
+		<table name="log" >
+			<column name="id)" type="varchar" jt="12" />
+			<column name="foreign key(task_fk" type="varchar" jt="12" />
+			<column name="id" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="name" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="level" type="varchar" length="2000000000" decimal="10" jt="12" />
+			<column name="msg" type="varchar" length="2000000000" decimal="10" jt="12" />
+			<column name="created_at" type="datetime" length="2000000000" decimal="10" jt="93" />
+			<column name="traceback" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="task_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="execution_fk" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<index name="pk_log" unique="UNIQUE" >
+				<column name="id)" />
+				<column name="foreign key(task_fk" />
+			</index>
+			<index name="ix_log_created_at" unique="NORMAL" >
+				<column name="created_at" />
+			</index>
+			<index name="ix_log_name" unique="NORMAL" >
+				<column name="name" />
+			</index>
+			<fk name="Fk_log" to_schema="Default" to_table="execution" delete_action="cascade" >
+				<fk_column name="execution_fk" pk="id" />
+			</fk>
+			<fk name="Fk_log" to_schema="Default" to_table="task" delete_action="cascade" >
+				<fk_column name="task_fk" pk="id" />
+			</fk>
+		</table>
+		<table name="metadata" >
+			<column name="id" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="name" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="value" type="blob" length="2000000000" decimal="10" jt="2004" />
+			<index name="pk_metadata" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="ix_metadata_name" unique="NORMAL" >
+				<column name="name" />
+			</index>
+		</table>
+		<table name="node" >
+			<column name="id)" type="varchar" jt="12" />
+			<column name="constraint node_state check (state in (&#039;initial&#039;" type="varchar" jt="12" />
+			<column name="&#039;creating&#039;" type="varchar" jt="12" />
+			<column name="&#039;created&#039;" type="varchar" jt="12" />
+			<column name="&#039;configuring&#039;" type="varchar" jt="12" />
+			<column name="&#039;configured&#039;" type="varchar" jt="12" />
+			<column name="&#039;starting&#039;" type="varchar" jt="12" />
+			<column name="&#039;started&#039;" type="varchar" jt="12" />
+			<column name="&#039;stopping&#039;" type="varchar" jt="12" />
+			<column name="&#039;deleting&#039;" type="varchar" jt="12" />
+			<column name="&#039;deleted&#039;" type="varchar" jt="12" />
+			<column name="&#039;error&#039;" type="varchar" jt="12" />
+			<column name="id" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="name" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="description" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="state" type="varchar" length="11" jt="12" mandatory="y" />
+			<column name="version" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="node_template_fk" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="host_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="type_fk" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="service_fk" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<index name="pk_node" unique="UNIQUE" >
+				<column name="id)" />
+				<column name="constraint node_state check (state in (&#039;initial&#039;" />
+				<column name="&#039;creating&#039;" />
+				<column name="&#039;created&#039;" />
+				<column name="&#039;configuring&#039;" />
+				<column name="&#039;configured&#039;" />
+				<column name="&#039;starting&#039;" />
+				<column name="&#039;started&#039;" />
+				<column name="&#039;stopping&#039;" />
+				<column name="&#039;deleting&#039;" />
+				<column name="&#039;deleted&#039;" />
+				<column name="&#039;error&#039;" />
+			</index>
+			<index name="ix_node_name" unique="NORMAL" >
+				<column name="name" />
+			</index>
+			<fk name="Fk_node" to_schema="Default" to_table="node" delete_action="cascade" >
+				<fk_column name="host_fk" pk="id" />
+			</fk>
+			<fk name="Fk_node" to_schema="Default" to_table="node_template" delete_action="cascade" >
+				<fk_column name="node_template_fk" pk="id" />
+			</fk>
+			<fk name="Fk_node" to_schema="Default" to_table="service" delete_action="cascade" >
+				<fk_column name="service_fk" pk="id" />
+			</fk>
+			<fk name="Fk_node" to_schema="Default" to_table="type" delete_action="cascade" >
+				<fk_column name="type_fk" pk="id" />
+			</fk>
+		</table>
+		<table name="node_template" >
+			<column name="id)" type="varchar" jt="12" />
+			<column name="foreign key(service_template_fk" type="varchar" jt="12" />
+			<column name="id" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="name" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="description" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="directives" type="blob" length="2000000000" decimal="10" jt="2004" />
+			<column name="default_instances" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="min_instances" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="max_instances" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="target_node_template_constraints" type="blob" length="2000000000" decimal="10" jt="2004" />
+			<column name="service_template_fk" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="type_fk" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<index name="pk_node_template" unique="UNIQUE" >
+				<column name="id)" />
+				<column name="foreign key(service_template_fk" />
+			</index>
+			<index name="ix_node_template_name" unique="NORMAL" >
+				<column name="name" />
+			</index>
+			<fk name="Fk_node_template" to_schema="Default" to_table="service_template" delete_action="cascade" >
+				<fk_column name="service_template_fk" pk="id" />
+			</fk>
+			<fk name="Fk_node_template" to_schema="Default" to_table="type" delete_action="cascade" >
+				<fk_column name="type_fk" pk="id" />
+			</fk>
+		</table>
+		<table name="operation" >
+			<column name="id)" type="varchar" jt="12" />
+			<column name="check (relationship_edge in (0" type="varchar" jt="12" />
+			<column name="1" type="varchar" jt="12" />
+			<column name="id" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="name" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="description" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="relationship_edge" type="boolean" length="2000000000" decimal="10" jt="-7" />
+			<column name="implementation" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="dependencies" type="varchar" length="2000000000" decimal="10" jt="12" />
+			<column name="function" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="executor" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="max_attempts" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="retry_interval" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="interface_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="plugin_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="service_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="operation_template_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<index name="pk_operation" unique="UNIQUE" >
+				<column name="id)" />
+				<column name="check (relationship_edge in (0" />
+				<column name="1" />
+			</index>
+			<index name="ix_operation_name" unique="NORMAL" >
+				<column name="name" />
+			</index>
+			<fk name="Fk_operation" to_schema="Default" to_table="interface" delete_action="cascade" >
+				<fk_column name="interface_fk" pk="id" />
+			</fk>
+			<fk name="Fk_operation" to_schema="Default" to_table="operation_template" delete_action="cascade" >
+				<fk_column name="operation_template_fk" pk="id" />
+			</fk>
+			<fk name="Fk_operation" to_schema="Default" to_table="plugin" delete_action="cascade" >
+				<fk_column name="plugin_fk" pk="id" />
+			</fk>
+			<fk name="Fk_operation" to_schema="Default" to_table="service" delete_action="cascade" >
+				<fk_column name="service_fk" pk="id" />
+			</fk>
+		</table>
+		<table name="operation_template" >
+			<column name="id)" type="varchar" jt="12" />
+			<column name="check (relationship_edge in (0" type="varchar" jt="12" />
+			<column name="1" type="varchar" jt="12" />
+			<column name="id" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="name" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="description" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="relationship_edge" type="boolean" length="2000000000" decimal="10" jt="-7" />
+			<column name="implementation" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="dependencies" type="varchar" length="2000000000" decimal="10" jt="12" />
+			<column name="function" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="executor" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="max_attempts" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="retry_interval" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="plugin_specification_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="service_template_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="interface_template_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<index name="pk_operation_template" unique="UNIQUE" >
+				<column name="id)" />
+				<column name="check (relationship_edge in (0" />
+				<column name="1" />
+			</index>
+			<index name="ix_operation_template_name" unique="NORMAL" >
+				<column name="name" />
+			</index>
+			<fk name="Fk_operation_template" to_schema="Default" to_table="interface_template" delete_action="cascade" >
+				<fk_column name="interface_template_fk" pk="id" />
+			</fk>
+			<fk name="Fk_operation_template" to_schema="Default" to_table="plugin_specification" delete_action="cascade" >
+				<fk_column name="plugin_specification_fk" pk="id" />
+			</fk>
+			<fk name="Fk_operation_template" to_schema="Default" to_table="service_template" delete_action="cascade" >
+				<fk_column name="service_template_fk" pk="id" />
+			</fk>
+		</table>
+		<table name="output" >
+			<column name="id)" type="varchar" jt="12" />
+			<column name="foreign key(service_template_fk" type="varchar" jt="12" />
+			<column name="id" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="name" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="type_name" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="description" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="_value" type="blob" length="2000000000" decimal="10" jt="2004" />
+			<column name="service_template_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="service_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<index name="pk_output" unique="UNIQUE" >
+				<column name="id)" />
+				<column name="foreign key(service_template_fk" />
+			</index>
+			<index name="ix_output_name" unique="NORMAL" >
+				<column name="name" />
+			</index>
+			<fk name="Fk_output" to_schema="Default" to_table="service" delete_action="cascade" >
+				<fk_column name="service_fk" pk="id" />
+			</fk>
+			<fk name="Fk_output" to_schema="Default" to_table="service_template" delete_action="cascade" >
+				<fk_column name="service_template_fk" pk="id" />
+			</fk>
+		</table>
+		<table name="plugin" >
+			<column name="id" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="name" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="archive_name" type="text" length="2000000000" decimal="10" jt="-1" mandatory="y" />
+			<column name="distribution" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="distribution_release" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="distribution_version" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="package_name" type="text" length="2000000000" decimal="10" jt="-1" mandatory="y" />
+			<column name="package_source" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="package_version" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="supported_platform" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="supported_py_versions" type="varchar" length="2000000000" decimal="10" jt="12" />
+			<column name="wheels" type="varchar" length="2000000000" decimal="10" jt="12" mandatory="y" />
+			<column name="uploaded_at" type="datetime" length="2000000000" decimal="10" jt="93" mandatory="y" />
+			<index name="pk_plugin" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="ix_plugin_archive_name" unique="NORMAL" >
+				<column name="archive_name" />
+			</index>
+			<index name="ix_plugin_name" unique="NORMAL" >
+				<column name="name" />
+			</index>
+			<index name="ix_plugin_uploaded_at" unique="NORMAL" >
+				<column name="uploaded_at" />
+			</index>
+			<index name="ix_plugin_package_name" unique="NORMAL" >
+				<column name="package_name" />
+			</index>
+		</table>
+		<table name="plugin_specification" >
+			<column name="id)" type="varchar" jt="12" />
+			<column name="check (enabled in (0" type="varchar" jt="12" />
+			<column name="1" type="varchar" jt="12" />
+			<column name="id" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="name" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="version" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="enabled" type="boolean" length="2000000000" decimal="10" jt="-7" mandatory="y" />
+			<column name="service_template_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="plugin_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<index name="pk_plugin_specification" unique="UNIQUE" >
+				<column name="id)" />
+				<column name="check (enabled in (0" />
+				<column name="1" />
+			</index>
+			<index name="ix_plugin_specification_name" unique="NORMAL" >
+				<column name="name" />
+			</index>
+			<fk name="Fk_plugin_specification" to_schema="Default" to_table="plugin" delete_action="cascade" >
+				<fk_column name="plugin_fk" pk="id" />
+			</fk>
+			<fk name="Fk_plugin_specification" to_schema="Default" to_table="service_template" delete_action="cascade" >
+				<fk_column name="service_template_fk" pk="id" />
+			</fk>
+		</table>
+		<table name="policy" >
+			<column name="id)" type="varchar" jt="12" />
+			<column name="foreign key(type_fk" type="varchar" jt="12" />
+			<column name="id" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="name" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="description" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="type_fk" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="service_fk" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="policy_template_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<index name="pk_policy" unique="UNIQUE" >
+				<column name="id)" />
+				<column name="foreign key(type_fk" />
+			</index>
+			<index name="ix_policy_name" unique="NORMAL" >
+				<column name="name" />
+			</index>
+			<fk name="Fk_policy" to_schema="Default" to_table="policy_template" delete_action="cascade" >
+				<fk_column name="policy_template_fk" pk="id" />
+			</fk>
+			<fk name="Fk_policy" to_schema="Default" to_table="service" delete_action="cascade" >
+				<fk_column name="service_fk" pk="id" />
+			</fk>
+			<fk name="Fk_policy" to_schema="Default" to_table="type" delete_action="cascade" >
+				<fk_column name="type_fk" pk="id" />
+			</fk>
+		</table>
+		<table name="policy_group" >
+			<column name="policy_id" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="group_id" type="integer" length="2000000000" decimal="10" jt="4" />
+			<fk name="Fk_policy_group" to_schema="Default" to_table="group" >
+				<fk_column name="group_id" pk="id" />
+			</fk>
+			<fk name="Fk_policy_group" to_schema="Default" to_table="policy" >
+				<fk_column name="policy_id" pk="id" />
+			</fk>
+		</table>
+		<table name="policy_node" >
+			<column name="policy_id" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="node_id" type="integer" length="2000000000" decimal="10" jt="4" />
+			<fk name="Fk_policy_node" to_schema="Default" to_table="node" >
+				<fk_column name="node_id" pk="id" />
+			</fk>
+			<fk name="Fk_policy_node" to_schema="Default" to_table="policy" >
+				<fk_column name="policy_id" pk="id" />
+			</fk>
+		</table>
+		<table name="policy_template" >
+			<column name="id)" type="varchar" jt="12" />
+			<column name="foreign key(service_template_fk" type="varchar" jt="12" />
+			<column name="id" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="name" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="description" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="service_template_fk" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="type_fk" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<index name="pk_policy_template" unique="UNIQUE" >
+				<column name="id)" />
+				<column name="foreign key(service_template_fk" />
+			</index>
+			<index name="ix_policy_template_name" unique="NORMAL" >
+				<column name="name" />
+			</index>
+			<fk name="Fk_policy_template" to_schema="Default" to_table="service_template" delete_action="cascade" >
+				<fk_column name="service_template_fk" pk="id" />
+			</fk>
+			<fk name="Fk_policy_template" to_schema="Default" to_table="type" delete_action="cascade" >
+				<fk_column name="type_fk" pk="id" />
+			</fk>
+		</table>
+		<table name="policy_template_group_template" >
+			<column name="policy_template_id" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="group_template_id" type="integer" length="2000000000" decimal="10" jt="4" />
+			<fk name="Fk_policy_template_group_template" to_schema="Default" to_table="group_template" >
+				<fk_column name="group_template_id" pk="id" />
+			</fk>
+			<fk name="Fk_policy_template_group_template" to_schema="Default" to_table="policy_template" >
+				<fk_column name="policy_template_id" pk="id" />
+			</fk>
+		</table>
+		<table name="policy_template_node_template" >
+			<column name="policy_template_id" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="node_template_id" type="integer" length="2000000000" decimal="10" jt="4" />
+			<fk name="Fk_policy_template_node_template" to_schema="Default" to_table="node_template" >
+				<fk_column name="node_template_id" pk="id" />
+			</fk>
+			<fk name="Fk_policy_template_node_template" to_schema="Default" to_table="policy_template" >
+				<fk_column name="policy_template_id" pk="id" />
+			</fk>
+		</table>
+		<table name="property" >
+			<column name="id)" type="varchar" jt="12" />
+			<column name="foreign key(group_template_fk" type="varchar" jt="12" />
+			<column name="id" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="name" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="type_name" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="description" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="_value" type="blob" length="2000000000" decimal="10" jt="2004" />
+			<column name="group_template_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="relationship_template_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="relationship_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="capability_template_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="group_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="artifact_template_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="policy_template_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="capability_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="artifact_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="node_template_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="node_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="policy_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<index name="pk_property" unique="UNIQUE" >
+				<column name="id)" />
+				<column name="foreign key(group_template_fk" />
+			</index>
+			<index name="ix_property_name" unique="NORMAL" >
+				<column name="name" />
+			</index>
+			<fk name="Fk_property" to_schema="Default" to_table="artifact" delete_action="cascade" >
+				<fk_column name="artifact_fk" pk="id" />
+			</fk>
+			<fk name="Fk_property" to_schema="Default" to_table="artifact_template" delete_action="cascade" >
+				<fk_column name="artifact_template_fk" pk="id" />
+			</fk>
+			<fk name="Fk_property" to_schema="Default" to_table="capability" delete_action="cascade" >
+				<fk_column name="capability_fk" pk="id" />
+			</fk>
+			<fk name="Fk_property" to_schema="Default" to_table="capability_template" delete_action="cascade" >
+				<fk_column name="capability_template_fk" pk="id" />
+			</fk>
+			<fk name="Fk_property" to_schema="Default" to_table="group" delete_action="cascade" >
+				<fk_column name="group_fk" pk="id" />
+			</fk>
+			<fk name="Fk_property" to_schema="Default" to_table="group_template" delete_action="cascade" >
+				<fk_column name="group_template_fk" pk="id" />
+			</fk>
+			<fk name="Fk_property" to_schema="Default" to_table="node" delete_action="cascade" >
+				<fk_column name="node_fk" pk="id" />
+			</fk>
+			<fk name="Fk_property" to_schema="Default" to_table="node_template" delete_action="cascade" >
+				<fk_column name="node_template_fk" pk="id" />
+			</fk>
+			<fk name="Fk_property" to_schema="Default" to_table="policy" delete_action="cascade" >
+				<fk_column name="policy_fk" pk="id" />
+			</fk>
+			<fk name="Fk_property" to_schema="Default" to_table="policy_template" delete_action="cascade" >
+				<fk_column name="policy_template_fk" pk="id" />
+			</fk>
+			<fk name="Fk_property" to_schema="Default" to_table="relationship" delete_action="cascade" >
+				<fk_column name="relationship_fk" pk="id" />
+			</fk>
+			<fk name="Fk_property" to_schema="Default" to_table="relationship_template" delete_action="cascade" >
+				<fk_column name="relationship_template_fk" pk="id" />
+			</fk>
+		</table>
+		<table name="relationship" >
+			<column name="id)" type="varchar" jt="12" />
+			<column name="foreign key(relationship_template_fk" type="varchar" jt="12" />
+			<column name="id" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="name" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="source_position" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="target_position" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="relationship_template_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="source_node_fk" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="type_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="target_node_fk" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="target_capability_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="requirement_template_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<index name="pk_relationship" unique="UNIQUE" >
+				<column name="id)" />
+				<column name="foreign key(relationship_template_fk" />
+			</index>
+			<index name="ix_relationship_name" unique="NORMAL" >
+				<column name="name" />
+			</index>
+			<fk name="Fk_relationship" to_schema="Default" to_table="capability" delete_action="cascade" >
+				<fk_column name="target_capability_fk" pk="id" />
+			</fk>
+			<fk name="Fk_relationship" to_schema="Default" to_table="node" delete_action="cascade" >
+				<fk_column name="target_node_fk" pk="id" />
+				<fk_column name="source_node_fk" pk="id" />
+			</fk>
+			<fk name="Fk_relationship" to_schema="Default" to_table="relationship_template" delete_action="cascade" >
+				<fk_column name="relationship_template_fk" pk="id" />
+			</fk>
+			<fk name="Fk_relationship" to_schema="Default" to_table="requirement_template" delete_action="cascade" >
+				<fk_column name="requirement_template_fk" pk="id" />
+			</fk>
+			<fk name="Fk_relationship" to_schema="Default" to_table="type" delete_action="cascade" >
+				<fk_column name="type_fk" pk="id" />
+			</fk>
+		</table>
+		<table name="relationship_template" >
+			<column name="id)" type="varchar" jt="12" />
+			<column name="foreign key(type_fk" type="varchar" jt="12" />
+			<column name="id" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="name" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="description" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="type_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<index name="pk_relationship_template" unique="UNIQUE" >
+				<column name="id)" />
+				<column name="foreign key(type_fk" />
+			</index>
+			<index name="ix_relationship_template_name" unique="NORMAL" >
+				<column name="name" />
+			</index>
+			<fk name="Fk_relationship_template" to_schema="Default" to_table="type" delete_action="cascade" >
+				<fk_column name="type_fk" pk="id" />
+			</fk>
+		</table>
+		<table name="requirement_template" >
+			<column name="id)" type="varchar" jt="12" />
+			<column name="foreign key(relationship_template_fk" type="varchar" jt="12" />
+			<column name="id" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="name" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="target_capability_name" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="target_node_template_constraints" type="blob" length="2000000000" decimal="10" jt="2004" />
+			<column name="relationship_template_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="target_capability_type_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="target_node_type_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="target_node_template_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="node_template_fk" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<index name="pk_requirement_template" unique="UNIQUE" >
+				<column name="id)" />
+				<column name="foreign key(relationship_template_fk" />
+			</index>
+			<index name="ix_requirement_template_name" unique="NORMAL" >
+				<column name="name" />
+			</index>
+			<fk name="Fk_requirement_template" to_schema="Default" to_table="node_template" delete_action="cascade" >
+				<fk_column name="node_template_fk" pk="id" />
+				<fk_column name="target_node_template_fk" pk="id" />
+			</fk>
+			<fk name="Fk_requirement_template" to_schema="Default" to_table="relationship_template" delete_action="cascade" >
+				<fk_column name="relationship_template_fk" pk="id" />
+			</fk>
+			<fk name="Fk_requirement_template" to_schema="Default" to_table="type" delete_action="cascade" >
+				<fk_column name="target_node_type_fk" pk="id" />
+				<fk_column name="target_capability_type_fk" pk="id" />
+			</fk>
+		</table>
+		<table name="service" >
+			<column name="id)" type="varchar" jt="12" />
+			<column name="foreign key(substitution_fk" type="varchar" jt="12" />
+			<column name="id" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="description" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="created_at" type="datetime" length="2000000000" decimal="10" jt="93" mandatory="y" />
+			<column name="updated_at" type="datetime" length="2000000000" decimal="10" jt="93" />
+			<column name="name" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="substitution_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="service_template_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<index name="pk_service" unique="UNIQUE" >
+				<column name="id)" />
+				<column name="foreign key(substitution_fk" />
+			</index>
+			<index name="ix_service_name" unique="UNIQUE" >
+				<column name="name" />
+			</index>
+			<index name="ix_service_created_at" unique="NORMAL" >
+				<column name="created_at" />
+			</index>
+			<fk name="Fk_service" to_schema="Default" to_table="service_template" delete_action="cascade" >
+				<fk_column name="service_template_fk" pk="id" />
+			</fk>
+			<fk name="Fk_service" to_schema="Default" to_table="substitution" delete_action="cascade" >
+				<fk_column name="substitution_fk" pk="id" />
+			</fk>
+		</table>
+		<table name="service_metadata" >
+			<column name="service_id" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="metadata_id" type="integer" length="2000000000" decimal="10" jt="4" />
+			<fk name="Fk_service_metadata" to_schema="Default" to_table="metadata" >
+				<fk_column name="metadata_id" pk="id" />
+			</fk>
+			<fk name="Fk_service_metadata" to_schema="Default" to_table="service" >
+				<fk_column name="service_id" pk="id" />
+			</fk>
+		</table>
+		<table name="service_modification" >
+			<column name="id)" type="varchar" jt="12" />
+			<column name="constraint service_modification_status check (status in (&#039;started&#039;" type="varchar" jt="12" />
+			<column name="&#039;finished&#039;" type="varchar" jt="12" />
+			<column name="&#039;rolledback&#039;" type="varchar" jt="12" />
+			<column name="id" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="name" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="context" type="varchar" length="2000000000" decimal="10" jt="12" />
+			<column name="created_at" type="datetime" length="2000000000" decimal="10" jt="93" mandatory="y" />
+			<column name="ended_at" type="datetime" length="2000000000" decimal="10" jt="93" />
+			<column name="modified_node_templates" type="varchar" length="2000000000" decimal="10" jt="12" />
+			<column name="nodes" type="varchar" length="2000000000" decimal="10" jt="12" />
+			<column name="status" type="varchar" length="10" jt="12" />
+			<column name="service_fk" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<index name="pk_service_modification" unique="UNIQUE" >
+				<column name="id)" />
+				<column name="constraint service_modification_status check (status in (&#039;started&#039;" />
+				<column name="&#039;finished&#039;" />
+				<column name="&#039;rolledback&#039;" />
+			</index>
+			<index name="ix_service_modification_created_at" unique="NORMAL" >
+				<column name="created_at" />
+			</index>
+			<index name="ix_service_modification_name" unique="NORMAL" >
+				<column name="name" />
+			</index>
+			<index name="ix_service_modification_ended_at" unique="NORMAL" >
+				<column name="ended_at" />
+			</index>
+			<fk name="Fk_service_modification" to_schema="Default" to_table="service" delete_action="cascade" >
+				<fk_column name="service_fk" pk="id" />
+			</fk>
+		</table>
+		<table name="service_plugin" >
+			<column name="service_id" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="plugin_id" type="integer" length="2000000000" decimal="10" jt="4" />
+			<fk name="Fk_service_plugin" to_schema="Default" to_table="plugin" >
+				<fk_column name="plugin_id" pk="id" />
+			</fk>
+			<fk name="Fk_service_plugin" to_schema="Default" to_table="service" >
+				<fk_column name="service_id" pk="id" />
+			</fk>
+		</table>
+		<table name="service_template" >
+			<column name="id)" type="varchar" jt="12" />
+			<column name="foreign key(relationship_type_fk" type="varchar" jt="12" />
+			<column name="id" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="description" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="main_file_name" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="created_at" type="datetime" length="2000000000" decimal="10" jt="93" mandatory="y" />
+			<column name="updated_at" type="datetime" length="2000000000" decimal="10" jt="93" />
+			<column name="name" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="relationship_type_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="interface_type_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="policy_type_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="node_type_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="artifact_type_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="group_type_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="capability_type_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="substitution_template_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<index name="pk_service_template" unique="UNIQUE" >
+				<column name="id)" />
+				<column name="foreign key(relationship_type_fk" />
+			</index>
+			<index name="ix_service_template_name" unique="UNIQUE" >
+				<column name="name" />
+			</index>
+			<index name="ix_service_template_created_at" unique="NORMAL" >
+				<column name="created_at" />
+			</index>
+			<fk name="Fk_service_template" to_schema="Default" to_table="substitution_template" delete_action="cascade" >
+				<fk_column name="substitution_template_fk" pk="id" />
+			</fk>
+			<fk name="Fk_service_template" to_schema="Default" to_table="type" delete_action="cascade" >
+				<fk_column name="capability_type_fk" pk="id" />
+				<fk_column name="group_type_fk" pk="id" />
+				<fk_column name="artifact_type_fk" pk="id" />
+				<fk_column name="node_type_fk" pk="id" />
+				<fk_column name="policy_type_fk" pk="id" />
+				<fk_column name="interface_type_fk" pk="id" />
+				<fk_column name="relationship_type_fk" pk="id" />
+			</fk>
+		</table>
+		<table name="service_template_metadata" >
+			<column name="service_template_id" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="metadata_id" type="integer" length="2000000000" decimal="10" jt="4" />
+			<fk name="Fk_service_template_metadata" to_schema="Default" to_table="metadata" >
+				<fk_column name="metadata_id" pk="id" />
+			</fk>
+			<fk name="Fk_service_template_metadata" to_schema="Default" to_table="service_template" >
+				<fk_column name="service_template_id" pk="id" />
+			</fk>
+		</table>
+		<table name="service_update" >
+			<column name="id)" type="varchar" jt="12" />
+			<column name="foreign key(service_fk" type="varchar" jt="12" />
+			<column name="id" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="name" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="created_at" type="datetime" length="2000000000" decimal="10" jt="93" mandatory="y" />
+			<column name="service_plan" type="varchar" length="2000000000" decimal="10" jt="12" mandatory="y" />
+			<column name="service_update_nodes" type="varchar" length="2000000000" decimal="10" jt="12" />
+			<column name="service_update_service" type="varchar" length="2000000000" decimal="10" jt="12" />
+			<column name="service_update_node_templates" type="varchar" length="2000000000" decimal="10" jt="12" />
+			<column name="modified_entity_ids" type="varchar" length="2000000000" decimal="10" jt="12" />
+			<column name="state" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="service_fk" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="execution_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<index name="pk_service_update" unique="UNIQUE" >
+				<column name="id)" />
+				<column name="foreign key(service_fk" />
+			</index>
+			<index name="ix_service_update_created_at" unique="NORMAL" >
+				<column name="created_at" />
+			</index>
+			<index name="ix_service_update_name" unique="NORMAL" >
+				<column name="name" />
+			</index>
+			<fk name="Fk_service_update" to_schema="Default" to_table="execution" delete_action="cascade" >
+				<fk_column name="execution_fk" pk="id" />
+			</fk>
+			<fk name="Fk_service_update" to_schema="Default" to_table="service" delete_action="cascade" >
+				<fk_column name="service_fk" pk="id" />
+			</fk>
+		</table>
+		<table name="service_update_step" >
+			<column name="id)" type="varchar" jt="12" />
+			<column name="constraint action_type check (action in (&#039;add&#039;" type="varchar" jt="12" />
+			<column name="&#039;remove&#039;" type="varchar" jt="12" />
+			<column name="&#039;modify&#039;" type="varchar" jt="12" />
+			<column name="id" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="name" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="action" type="varchar" length="6" jt="12" mandatory="y" />
+			<column name="entity_id" type="text" length="2000000000" decimal="10" jt="-1" mandatory="y" />
+			<column name="entity_type" type="varchar" length="12" jt="12" mandatory="y" />
+			<column name="service_update_fk" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<index name="pk_service_update_step" unique="UNIQUE" >
+				<column name="id)" />
+				<column name="constraint action_type check (action in (&#039;add&#039;" />
+				<column name="&#039;remove&#039;" />
+				<column name="&#039;modify&#039;" />
+			</index>
+			<index name="ix_service_update_step_name" unique="NORMAL" >
+				<column name="name" />
+			</index>
+			<fk name="Fk_service_update_step" to_schema="Default" to_table="service_update" delete_action="cascade" >
+				<fk_column name="service_update_fk" pk="id" />
+			</fk>
+		</table>
+		<table name="substitution" >
+			<column name="id)" type="varchar" jt="12" />
+			<column name="foreign key(node_type_fk" type="varchar" jt="12" />
+			<column name="id" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="name" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="node_type_fk" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="substitution_template_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<index name="pk_substitution" unique="UNIQUE" >
+				<column name="id)" />
+				<column name="foreign key(node_type_fk" />
+			</index>
+			<index name="ix_substitution_name" unique="NORMAL" >
+				<column name="name" />
+			</index>
+			<fk name="Fk_substitution" to_schema="Default" to_table="substitution_template" delete_action="cascade" >
+				<fk_column name="substitution_template_fk" pk="id" />
+			</fk>
+			<fk name="Fk_substitution" to_schema="Default" to_table="type" delete_action="cascade" >
+				<fk_column name="node_type_fk" pk="id" />
+			</fk>
+		</table>
+		<table name="substitution_mapping" >
+			<column name="id)" type="varchar" jt="12" />
+			<column name="foreign key(node_fk" type="varchar" jt="12" />
+			<column name="id" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="name" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="node_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="capability_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="requirement_template_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="substitution_fk" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<index name="pk_substitution_mapping" unique="UNIQUE" >
+				<column name="id)" />
+				<column name="foreign key(node_fk" />
+			</index>
+			<index name="ix_substitution_mapping_name" unique="NORMAL" >
+				<column name="name" />
+			</index>
+			<fk name="Fk_substitution_mapping" to_schema="Default" to_table="capability" delete_action="cascade" >
+				<fk_column name="capability_fk" pk="id" />
+			</fk>
+			<fk name="Fk_substitution_mapping" to_schema="Default" to_table="node" delete_action="cascade" >
+				<fk_column name="node_fk" pk="id" />
+			</fk>
+			<fk name="Fk_substitution_mapping" to_schema="Default" to_table="requirement_template" delete_action="cascade" >
+				<fk_column name="requirement_template_fk" pk="id" />
+			</fk>
+			<fk name="Fk_substitution_mapping" to_schema="Default" to_table="substitution" delete_action="cascade" >
+				<fk_column name="substitution_fk" pk="id" />
+			</fk>
+		</table>
+		<table name="substitution_template" >
+			<column name="id)" type="varchar" jt="12" />
+			<column name="foreign key(node_type_fk" type="varchar" jt="12" />
+			<column name="id" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="name" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="node_type_fk" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<index name="pk_substitution_template" unique="UNIQUE" >
+				<column name="id)" />
+				<column name="foreign key(node_type_fk" />
+			</index>
+			<index name="ix_substitution_template_name" unique="NORMAL" >
+				<column name="name" />
+			</index>
+			<fk name="Fk_substitution_template" to_schema="Default" to_table="type" delete_action="cascade" >
+				<fk_column name="node_type_fk" pk="id" />
+			</fk>
+		</table>
+		<table name="substitution_template_mapping" >
+			<column name="id)" type="varchar" jt="12" />
+			<column name="foreign key(capability_template_fk" type="varchar" jt="12" />
+			<column name="id" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="name" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="capability_template_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="requirement_template_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="substitution_template_fk" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<index name="pk_substitution_template_mapping" unique="UNIQUE" >
+				<column name="id)" />
+				<column name="foreign key(capability_template_fk" />
+			</index>
+			<index name="ix_substitution_template_mapping_name" unique="NORMAL" >
+				<column name="name" />
+			</index>
+			<fk name="Fk_substitution_template_mapping" to_schema="Default" to_table="capability_template" delete_action="cascade" >
+				<fk_column name="capability_template_fk" pk="id" />
+			</fk>
+			<fk name="Fk_substitution_template_mapping" to_schema="Default" to_table="requirement_template" delete_action="cascade" >
+				<fk_column name="requirement_template_fk" pk="id" />
+			</fk>
+			<fk name="Fk_substitution_template_mapping" to_schema="Default" to_table="substitution_template" delete_action="cascade" >
+				<fk_column name="substitution_template_fk" pk="id" />
+			</fk>
+		</table>
+		<table name="task" >
+			<column name="id)" type="varchar" jt="12" />
+			<column name="constraint status check (status in (&#039;pending&#039;" type="varchar" jt="12" />
+			<column name="&#039;retrying&#039;" type="varchar" jt="12" />
+			<column name="&#039;sent&#039;" type="varchar" jt="12" />
+			<column name="&#039;started&#039;" type="varchar" jt="12" />
+			<column name="&#039;success&#039;" type="varchar" jt="12" />
+			<column name="&#039;failed&#039;" type="varchar" jt="12" />
+			<column name="id" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="name" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="status" type="varchar" length="8" jt="12" />
+			<column name="due_at" type="datetime" length="2000000000" decimal="10" jt="93" mandatory="y" />
+			<column name="started_at" type="datetime" length="2000000000" decimal="10" jt="93" />
+			<column name="ended_at" type="datetime" length="2000000000" decimal="10" jt="93" />
+			<column name="attempts_count" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="function" type="varchar" length="2000000000" decimal="10" jt="12" />
+			<column name="max_attempts" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="retry_interval" type="float" length="2000000000" decimal="10" jt="7" />
+			<column name="ignore_failure" type="boolean" length="2000000000" decimal="10" jt="-7" />
+			<column name="interface_name" type="varchar" length="2000000000" decimal="10" jt="12" />
+			<column name="operation_name" type="varchar" length="2000000000" decimal="10" jt="12" />
+			<column name="_api_id" type="varchar" length="2000000000" decimal="10" jt="12" />
+			<column name="_executor" type="blob" length="2000000000" decimal="10" jt="2004" />
+			<column name="_context_cls" type="blob" length="2000000000" decimal="10" jt="2004" />
+			<column name="_stub_type" type="varchar" length="17" jt="12" />
+			<column name="plugin_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="execution_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="relationship_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="node_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<index name="pk_task" unique="UNIQUE" >
+				<column name="id)" />
+				<column name="constraint status check (status in (&#039;pending&#039;" />
+				<column name="&#039;retrying&#039;" />
+				<column name="&#039;sent&#039;" />
+				<column name="&#039;started&#039;" />
+				<column name="&#039;success&#039;" />
+				<column name="&#039;failed&#039;" />
+			</index>
+			<index name="ix_task_due_at" unique="NORMAL" >
+				<column name="due_at" />
+			</index>
+			<index name="ix_task_name" unique="NORMAL" >
+				<column name="name" />
+			</index>
+			<fk name="Fk_task" to_schema="Default" to_table="execution" delete_action="cascade" >
+				<fk_column name="execution_fk" pk="id" />
+			</fk>
+			<fk name="Fk_task" to_schema="Default" to_table="node" delete_action="cascade" >
+				<fk_column name="node_fk" pk="id" />
+			</fk>
+			<fk name="Fk_task" to_schema="Default" to_table="plugin" delete_action="cascade" >
+				<fk_column name="plugin_fk" pk="id" />
+			</fk>
+			<fk name="Fk_task" to_schema="Default" to_table="relationship" delete_action="cascade" >
+				<fk_column name="relationship_fk" pk="id" />
+			</fk>
+		</table>
+		<table name="task_task" >
+			<column name="task_id" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="task_self_ref_id" type="integer" length="2000000000" decimal="10" jt="4" />
+			<fk name="Fk_task_task" to_schema="Default" to_table="task" >
+				<fk_column name="task_self_ref_id" pk="id" />
+				<fk_column name="task_id" pk="id" />
+			</fk>
+		</table>
+		<table name="type" >
+			<column name="id)" type="varchar" jt="12" />
+			<column name="foreign key(parent_type_fk" type="varchar" jt="12" />
+			<column name="id" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="name" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="variant" type="text" length="2000000000" decimal="10" jt="-1" mandatory="y" />
+			<column name="description" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="role" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="parent_type_fk" type="integer" length="2000000000" decimal="10" jt="4" />
+			<index name="pk_type" unique="UNIQUE" >
+				<column name="id)" />
+				<column name="foreign key(parent_type_fk" />
+			</index>
+			<index name="ix_type_name" unique="NORMAL" >
+				<column name="name" />
+			</index>
+			<fk name="Fk_type" to_schema="Default" to_table="type" delete_action="cascade" >
+				<fk_column name="parent_type_fk" pk="id" />
+			</fk>
+		</table>
+		<table name="type_definition" >
+			<column name="id)" type="varchar" jt="12" />
+			<column name="constraint _type_definition_name_version_unique unique (name" type="varchar" jt="12" />
+			<column name="version" type="text" length="2000000000" decimal="10" jt="-1" mandatory="y" />
+			<column name="id" type="integer" length="2000000000" decimal="10" jt="4" mandatory="y" />
+			<column name="name" type="text" length="2000000000" decimal="10" jt="-1" />
+			<column name="main_file_name" type="text" length="2000000000" decimal="10" jt="-1" mandatory="y" />
+			<column name="uploaded_at" type="datetime" length="2000000000" decimal="10" jt="93" mandatory="y" />
+			<index name="pk_type_definition" unique="UNIQUE" >
+				<column name="id)" />
+				<column name="constraint _type_definition_name_version_unique unique (name" />
+				<column name="version" />
+			</index>
+			<index name="ix_type_definition_name" unique="NORMAL" >
+				<column name="name" />
+			</index>
+			<index name="sqlite_autoindex_type_definition_1" unique="UNIQUE" >
+				<column name="name" />
+				<column name="version" />
+			</index>
+		</table>
+		<table name="valid_sources_capability_template_type" >
+			<column name="capability_template_id" type="integer" length="2000000000" decimal="10" jt="4" />
+			<column name="type_id" type="integer" length="2000000000" decimal="10" jt="4" />
+			<fk name="Fk_valid_sources_capability_template_type" to_schema="Default" to_table="capability_template" >
+				<fk_column name="capability_template_id" pk="id" />
+			</fk>
+			<fk name="Fk_valid_sources_capability_template_type" to_schema="Default" to_table="type" >
+				<fk_column name="type_id" pk="id" />
+			</fk>
+		</table>
+	</schema>
+	<connector name="Sqlite" database="Sqlite" driver_class="org.sqlite.JDBC" driver_jar="sqlite-jdbc-3.19.3.jar" driver_desc="Standard" host="localhost" port="7210" instance="/home/abhishek/db.sqlite" />
+	<layout name="Parsed Script Layout" id="Layout_796f47" show_relation="columns" >
+		<entity schema="Default" name="argument" color="c8f5bf" x="3120" y="1305" />
+		<entity schema="Default" name="artifact" color="bfd4f5" x="540" y="315" />
+		<entity schema="Default" name="artifact_template" color="bfd4f5" x="810" y="45" />
+		<entity schema="Default" name="attribute" color="bfbff5" x="1725" y="975" />
+		<entity schema="Default" name="capability" color="f5ddbf" x="1050" y="975" />
+		<entity schema="Default" name="capability_template" color="f5ddbf" x="840" y="975" />
+		<entity schema="Default" name="configuration" color="c8f5bf" x="3390" y="1305" />
+		<entity schema="Default" name="execution" color="c8f5bf" x="3660" y="45" />
+		<entity schema="Default" name="group" color="bfd4f5" x="1965" y="1515" />
+		<entity schema="Default" name="group_node" color="bfd4f5" x="2175" y="1515" />
+		<entity schema="Default" name="group_template" color="d2bff5" x="2010" y="1110" />
+		<entity schema="Default" name="group_template_node_template" color="d2bff5" x="2220" y="1320" />
+		<entity schema="Default" name="input" color="bfbff5" x="2010" y="45" />
+		<entity schema="Default" name="interface" color="bfbff5" x="2235" y="645" />
+		<entity schema="Default" name="interface_template" color="bfbff5" x="1965" y="405" />
+		<entity schema="Default" name="log" color="c8f5bf" x="4080" y="45" />
+		<entity schema="Default" name="metadata" color="f5ddbf" x="5025" y="45" />
+		<entity schema="Default" name="node" color="bfd4f5" x="1290" y="90" />
+		<entity schema="Default" name="node_template" color="bfd4f5" x="1650" y="510" />
+		<entity schema="Default" name="operation" color="c8f5bf" x="3120" y="945" />
+		<entity schema="Default" name="operation_template" color="c8f5bf" x="3390" y="945" />
+		<entity schema="Default" name="output" color="f5ddbf" x="4785" y="390" />
+		<entity schema="Default" name="plugin" color="c8f5bf" x="3405" y="285" />
+		<entity schema="Default" name="plugin_specification" color="c8f5bf" x="3630" y="585" />
+		<entity schema="Default" name="policy" color="d2bff5" x="2505" y="1110" />
+		<entity schema="Default" name="policy_group" color="bfd4f5" x="2175" y="1740" />
+		<entity schema="Default" name="policy_node" color="d2bff5" x="2715" y="1110" />
+		<entity schema="Default" name="policy_template" color="d2bff5" x="2220" y="1110" />
+		<entity schema="Default" name="policy_template_group_template" color="d2bff5" x="1965" y="1320" />
+		<entity schema="Default" name="policy_template_node_template" color="d2bff5" x="1965" y="975" />
+		<entity schema="Default" name="property" color="bfd4f5" x="1650" y="90" />
+		<entity schema="Default" name="relationship" color="bfbff5" x="2580" y="45" />
+		<entity schema="Default" name="relationship_template" color="bfbff5" x="2880" y="45" />
+		<entity schema="Default" name="service" color="c8f5bf" x="3405" y="45" />
+		<entity schema="Default" name="service_metadata" color="f5ddbf" x="4785" y="255" />
+		<entity schema="Default" name="service_modification" color="f5ddbf" x="4320" y="390" />
+		<entity schema="Default" name="service_plugin" color="c8f5bf" x="3240" y="150" />
+		<entity schema="Default" name="service_template" color="f5ddbf" x="4500" y="45" />
+		<entity schema="Default" name="service_template_metadata" color="f5ddbf" x="4785" y="45" />
+		<entity schema="Default" name="service_update" color="c8f5bf" x="3120" y="285" />
+		<entity schema="Default" name="service_update_step" color="c8f5bf" x="3120" y="585" />
+		<entity schema="Default" name="substitution" color="bfd4f5" x="1290" y="735" />
+		<entity schema="Default" name="substitution_mapping" color="bfd4f5" x="1290" y="510" />
+		<entity schema="Default" name="substitution_template" color="f5ddbf" x="810" y="1215" />
+		<entity schema="Default" name="substitution_template_mapping" color="f5ddbf" x="1050" y="1395" />
+		<entity schema="Default" name="task" color="bfbff5" x="2235" y="45" />
+		<entity schema="Default" name="task_task" color="bfbff5" x="2580" y="435" />
+		<entity schema="Default" name="type" color="bfd4f5" x="1035" y="90" />
+		<entity schema="Default" name="type_definition" color="d2bff5" x="45" y="975" />
+		<entity schema="Default" name="valid_sources_capability_template_type" color="f5ddbf" x="540" y="1080" />
+		<entity schema="Default" name="requirement_template" color="bfd4f5" x="990" y="315" />
+	</layout>
+</project>
